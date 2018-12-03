@@ -26,10 +26,14 @@ ToggleApp(ProgramLocation, ProcessName) {
     If ProcessExist(ProcessName){
         WindowId := WinActive("ahk_exe" ProcessName)
         WinGet, WindowCount, Count, ahk_exe %ProcessName%
+        WinGet, OpenWindowList, List, ahk_exe %ProcessName%
         If WindowId && WindowCount > 1 {
-            WinSet, Bottom,, ahk_exe %ProcessName%
+            WinActivate, ahk_id %OpenWindowList2%
         }
-        WinActivate, ahk_exe %ProcessName%
+        Else {
+            WinActivate, ahk_id %OpenWindowList1%
+        }
+            
     }
     Else {
         Run, %ProgramLocation%
